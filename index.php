@@ -3,7 +3,6 @@
   1. AIN NAJIHA BINTI JUNAIDI (A23CS0038)
   2. MUHAMMAD ZULQARNAIN BIN ALI (A23CS0139)
   3. SIA JUN YI (A23CS0178)
-  Video: https://youtu.be/U9H4E__R7f0
 -->
 
 <!DOCTYPE html>
@@ -11,7 +10,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Website Assignment 2</title>
+    <title>Website Assignment 3</title>
     <link rel="stylesheet" href="a2style.css" />
     <link
       rel="stylesheet"
@@ -40,10 +39,10 @@
         <div class="right">
           <details>
             <summary><strong>More</strong></summary>
+            <br>
             <div class="right-item">
               <a href="#skills">My Skills</a>
-              <a href="#">Achievements</a>
-              <a href="#">My Education</a>
+              <a href="#messages">Messages</a>
             </div>
           </details>
         </div>
@@ -100,11 +99,11 @@
             <h2>My Project</h2>
 
             <div class="member-card">
-              <img
-                src="https://edison365.com/?seraph_accel_gi=wp-content%2Fuploads%2F2022%2F03%2FHow-do-hackathons-work.png&n=iNf2OlXUkWEBkZdk37MnnA"
-                alt="Hackathon project"
-              />
               <div class="member-info">
+                <img
+                  src="https://edison365.com/?seraph_accel_gi=wp-content%2Fuploads%2F2022%2F03%2FHow-do-hackathons-work.png&n=iNf2OlXUkWEBkZdk37MnnA"
+                  alt="Hackathon project"
+                />
                 <h3>Hackathons</h3>
                 <p><em>3 September 2023</em></p>
                 <p>
@@ -116,6 +115,10 @@
 
             <div class="member-card">
               <div class="member-info">
+                <img
+                  src="https://www.regens.com/documents/20182/72144/first+AI+project+CIKKBE.jpg/03f41983-cbde-0ff0-470d-89f9d8733bed?t=1563869152630"
+                  alt="AI project interface preview"
+                />
                 <h3>AI project</h3>
                 <p><em>4 October 2022</em></p>
                 <p>
@@ -123,10 +126,6 @@
                   88% accuracy using CNN + Flask...
                 </p>
               </div>
-              <img
-                src="https://www.regens.com/documents/20182/72144/first+AI+project+CIKKBE.jpg/03f41983-cbde-0ff0-470d-89f9d8733bed?t=1563869152630"
-                alt="AI project interface preview"
-              />
             </div>
           </section>
 
@@ -154,7 +153,14 @@
                   alt="JavaScript logo"
                 />
                 <p>JavaScript</p>
-              </div>
+                </div>
+                <div class="skill-box">
+                    <img
+                    src="https://images.seeklogo.com/logo-png/26/1/php-logo-png_seeklogo-265704.png"
+                    alt="PHP logo"
+                    />
+                <p>PHP</p>
+                </div>
             </div>
           </section>
 
@@ -163,13 +169,8 @@
             <h2>Contact Us</h2>
             <div class="contact-section">
               <div class="contact-info">
-                <h2>Feel free to contact me</h2>
-                <form
-                  class="contact-form"
-                  action="#"
-                  method="post"
-                  aria-label="Contact Form"
-                >
+                <h3>Feel free to contact me</h3>
+                <form class="contact-form" action="ass3.php" method="post" aria-label="Contact Form">
                   <label for="name">Name:</label>
                   <input type="text" id="name" name="name" required />
 
@@ -177,14 +178,9 @@
                   <input type="email" id="email" name="email" required />
 
                   <label for="message">Message:</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="4"
-                    placeholder="Write your message here..."
-                    required
-                  ></textarea>
-
+                  <textarea id="message" name="message" rows="4"
+                    placeholder="Write your message here..." required ></textarea>
+                    
                   <button type="submit">Submit</button>
                 </form>
               </div>
@@ -216,7 +212,33 @@
                 </table>
               </div>
             </div>
+
+            <!-- Messages -->          
+            <section class="content5" id="messages">
+                <h2>Messages</h2>
+            
+                <?php
+                $host = "sql100.infinityfree.com";
+                $username = "if0_39233150";     
+                $password = "tplj4GhvUkArN";         
+                $dbname = "if0_39233150_myass3"; 
+
+                $conn = new mysqli($host, $username, $password, $dbname);
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                $result = $conn->query("SELECT fullname, con_message, msg_time FROM ContactMsgs ORDER BY msg_time DESC");
+                
+                while ($row = $result->fetch_assoc()) {
+                    echo "<p><strong>" . htmlspecialchars($row['fullname']) . "</strong> - <small>" . $row['msg_time'] . "</small><br>";
+                    echo (htmlspecialchars($row['con_message'])) . "</p><br><hr>";
+                }
+                $conn->close();
+                ?>
+            </section>
           </section>
+
         </main>
 
         <!-- Footer -->
@@ -231,7 +253,7 @@
       >&uarr;</a
     >
 
-    <!-- ✅ JavaScript Interactivity -->
+    <!-- JavaScript Interactivity -->
     <script>
       // FORM VALIDATION
       document
